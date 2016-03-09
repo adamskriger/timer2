@@ -3,22 +3,29 @@ const App = React.createClass({
 
   getInitialState : function(){
       return {
-        time : "Press A Button"
+        status : "Press A Button"
 
       }
     },
 
 
     increase    :      function(){
-      this.state.time = "You Pressed Increase"
-      this.setState({ time: this.state.time})
+      this.state.status = "You Pressed Increase"
+      this.setState({ status: this.state.status})
       console.log("Increase");
   },
 
+  decrease    :      function(){
+    this.state.status = "You Pressed Decrease"
+    this.setState({ status: this.state.status})
+    console.log("decrease");
+  },
 
-
-
-
+  pause    :      function(){
+    this.state.status = "You Pressed pause"
+    this.setState({ status: this.state.status})
+    console.log("pause");
+  },
 
 
   render : function(){
@@ -26,8 +33,11 @@ const App = React.createClass({
     return (
       <div>
       <h1>App Container</h1>
-      <Display time={this.state.time} />
-      <Button action={this.increase}/>
+      <Display status={this.state.status} />
+      <Button action={this.increase} name={"increase"}/>
+      <Button action={this.decrease} name={"decrease"}/>
+      <Button action={this.pause} name={"Pause"}/>
+
       </div>
     )
   }
@@ -42,7 +52,7 @@ const Display = React.createClass({
 
     return (
       <div>
-      <h1>{this.props.time}</h1>
+      <h1>{this.props.status}</h1>
 
       </div>
     )
@@ -58,7 +68,7 @@ const Button = React.createClass({
 
     return (
       <div>
-      <button onClick={this.props.action}>increase</button>
+      <button onClick={this.props.action}>{this.props.name}</button>
 
       </div>
     )
