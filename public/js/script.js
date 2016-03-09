@@ -1,4 +1,3 @@
-
 const App = React.createClass({
 
   getInitialState : function(){
@@ -9,23 +8,6 @@ const App = React.createClass({
     },
 
 
-    increase    :      function(){
-      this.state.status = "You Pressed Increase"
-      this.setState({ status: this.state.status})
-      console.log("Increase");
-  },
-
-  decrease    :      function(){
-    this.state.status = "You Pressed Decrease"
-    this.setState({ status: this.state.status})
-    console.log("decrease");
-  },
-
-  pause    :      function(){
-    this.state.status = "You Pressed pause"
-    this.setState({ status: this.state.status})
-    console.log("pause");
-  },
 
 
   render : function(){
@@ -33,60 +15,57 @@ const App = React.createClass({
     return (
       <div>
       <h1>App Container</h1>
-      <Display status={this.state.status} />
-      <Button action={this.increase} name={"increase"}/>
-      <Button action={this.decrease} name={"decrease"}/>
-      <Button action={this.pause} name={"Pause"}/>
-
+      <CreateTaskForm />
       </div>
     )
   }
 })
 
 
-const Display = React.createClass({
+const CreateTaskForm = React.createClass({
 
+  addTask : function(event){
+
+    event.preventDefault();
+
+    var task = {firstfield: this.refs.createtaskinput.value}
+
+    return (
+      console.log(task)
+    )
+  },
 
 
   render : function(){
 
     return (
       <div>
-      <h1>{this.props.status}</h1>
+      <h3>Go Ahead, Create A Task</h3>
+      <form id ="createtaskform" ref="createtaskform" onSubmit={this.addTask}>
 
+      <input ref="createtaskinput" type="text" placeholder="Enter Task"/>
+      <button> Add Task </button>
+      </form>
       </div>
     )
   }
 })
-
 
 const Button = React.createClass({
 
 
 
+
   render : function(){
 
     return (
       <div>
-      <button onClick={this.props.action}>{this.props.name}</button>
+      <button type="submit" onClick={this.props.action}>{this.props.name}</button>
 
       </div>
     )
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
