@@ -4,20 +4,28 @@ const App = React.createClass({
 
   getInitialState : function(){
       return {
-        tasks : []
+        tasks : {}
 
       }
     },
 
+    createTask : function(singleTask){
+      var timestamp = (new Date()).getTime();
+
+
+      this.state.tasks ['... ' + this.refs.name.value + ':'  + ' ' + timestamp + ' ' ] = singleTask
+      this.setState({tasks : this.state.tasks})
+
+
+    },
     alterState : function(event){
       event.preventDefault();
 
-          var toSet = [];
-          toSet.push(this.refs.name.value)
-          console.log(toSet);
+          var task= {
+            name : this.refs.name.value
+          }
 
-          this.state.tasks = toSet
-          this.setState({tasks: this.state.tasks})
+          this.createTask(task)
           this.refs.form.reset();
 
           console.log("clicked");
@@ -49,13 +57,12 @@ const Tasklist = React.createClass({
 
 
   render : function(){
+    console.log("this dot props dot tasks", this.props.tasks);
 
     return (
       <div>
 
- <p>{Object.keys(this.props.tasks)}
- </p>
-
+ <p> { Object.keys(this.props.tasks) } </p>
 
     </div>
 
