@@ -1,12 +1,50 @@
+
+
 const App = React.createClass({
 
   getInitialState : function(){
       return {
-        status : "Press A Button"
+        tasks : []
 
       }
     },
 
+    alterState : function(event){
+      event.preventDefault();
+
+          var toSet = [];
+          toSet.push(this.refs.name.value)
+          console.log(toSet);
+
+          this.state.tasks = toSet
+          this.setState({tasks: this.state.tasks})
+          this.refs.form.reset();
+
+          console.log("clicked");
+    },
+
+
+
+    render : function(){
+
+      return (
+<div>
+        <Tasklist tasks={this.state.tasks} />
+
+
+        <form ref="form" onSubmit={this.alterState}>
+              <input type="text" ref="name" placeholder="Task"/>
+              <button>Add Task</button>
+
+        </form>
+
+</div>
+      )
+    }
+
+})
+
+const Tasklist = React.createClass({
 
 
 
@@ -14,45 +52,21 @@ const App = React.createClass({
 
     return (
       <div>
-      <h1>App Container</h1>
-      <CreateTaskForm />
-      </div>
+
+ <p>{Object.keys(this.props.tasks)}
+ </p>
+
+
+    </div>
+
+
+
     )
   }
 })
 
 
-const CreateTaskForm = React.createClass({
-
-  addTask : function(event){
-
-    event.preventDefault();
-
-    var task = {firstfield: this.refs.createtaskinput.value}
-
-    return (
-      console.log(task)
-    )
-  },
-
-
-  render : function(){
-
-    return (
-      <div>
-      <h3>Go Ahead, Create A Task</h3>
-      <form id ="createtaskform" ref="createtaskform" onSubmit={this.addTask}>
-
-      <input ref="createtaskinput" type="text" placeholder="Enter Task"/>
-      <button> Add Task </button>
-      </form>
-      </div>
-    )
-  }
-})
-
-const Button = React.createClass({
-
+const Task = React.createClass({
 
 
 
@@ -60,14 +74,34 @@ const Button = React.createClass({
 
     return (
       <div>
-      <button type="submit" onClick={this.props.action}>{this.props.name}</button>
+    <p>Single Task</p>
 
-      </div>
+    </div>
+
+
     )
   }
 })
 
 
+
+
+
+
+const Form = React.createClass({
+
+
+
+  render : function(){
+
+    return (
+      <div>
+
+
+      </div>
+    )
+  }
+})
 
 
 
